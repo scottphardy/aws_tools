@@ -7,13 +7,9 @@ ec2 = boto3.resource('ec2', region_name=region)
 instances = ec2.instances.filter(
     Filters=[{'Name': 'instance-state-name', 'Values': ['running']}])
 
-def list_instances():
-    instances = ec2.instances.filter(
-        Filters=[{'Name': 'instance-state-name', 'Values': ['running']}])
-    for instance in instances:
-        return(instance.id)
-
-ids = list_instances().split()
+ids = []
+for instance in instances:
+    ids.append(instance.id)
 
 def stop_instances():
     for instance_id in ids:
@@ -21,5 +17,10 @@ def stop_instances():
         response = instance.stop()
 
 stop_instances()
-# ec2.instances.filter(InstanceIds=ids).stop()
-print('%r is stopping... ' % ids)
+
+print('Stopping the following instances: ')
+print('\n')
+for i in ids:
+    id = str(i)
+    print(id)
+print('\n')

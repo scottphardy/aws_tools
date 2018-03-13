@@ -9,10 +9,10 @@ instances = ec2.instances.filter(
 
 def list_instances():
     for instance in instances:
-        return(instance.id, instance.instance_type)
+        print(instance.id, instance.instance_type)
 
-instances = list_instances()
-
+print('\n')
 print('The following EC2 instances are running: ')
 print('\n')
-print(instances)
+list_instances()
+print('\n')
